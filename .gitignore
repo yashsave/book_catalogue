@@ -1,0 +1,59 @@
+# Eclipse related files
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+## No Eclipse settings from nested workspace
+.classpath
+.settings/
+target/
+bin/
+test-output/
+.metadata/
+
+## various other file types we don't want to have in the repository:
+.DS_Store
+*~
+*#
+*.licensed
+*.aux
+*_trace
+
+## no eclipse packs
+*.tar.gz
+
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+!*-connector-*.zip
+*.tar.gz
+*.rar
+*.car
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+DDMSIntegrationMMP/DDMSIntegrationRRP/.meta/
+
