@@ -22,7 +22,6 @@ public class Book {
 
 
 	 // Getter Methods 
-
 	 public String getTitle() {
 	  return title;
 	 }
@@ -39,7 +38,6 @@ public class Book {
 	 }
 
 	 // Setter Methods 
-
 	 public void setTitle(String Title) {
 	  this.title = Title;
 	 }
