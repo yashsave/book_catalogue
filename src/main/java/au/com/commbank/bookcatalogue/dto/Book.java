@@ -1,6 +1,7 @@
 package au.com.commbank.bookcatalogue.dto;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ public class Book {
 	 private String title;
 	
 	@JsonProperty("author")
-	 private ArrayList < String > author = new ArrayList < String > ();
+	 private List < String > author = new ArrayList < String > ();
 	 
 	@JsonProperty("isbn")
 	private String isbn;
@@ -26,7 +27,7 @@ public class Book {
 	  return title;
 	 }
 	 
-	 public ArrayList<String> getAuthor() {
+	 public List<String> getAuthor() {
 		return author;
 	}
 	 public String getISBN() {
@@ -42,7 +43,7 @@ public class Book {
 	  this.title = Title;
 	 }
 
-	 public void setAuthor(ArrayList<String> author) {
+	 public void setAuthor(List<String> author) {
 		this.author = author;
 	 }	
 	 

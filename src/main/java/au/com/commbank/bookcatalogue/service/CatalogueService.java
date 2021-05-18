@@ -19,15 +19,15 @@ import au.com.commbank.bookcatalogue.exception.IdNotFoundException;
 public class CatalogueService {
 	@Autowired
 	CatalogueDB db;
-	//@Autowired
-	//KafkaTopic topic;
+	@Autowired
+	KafkaTopic topic;
 	
 	@Autowired
 	IdNotFoundException idNotFndException;
 	
 	public ResponseEntity<String> addBook(Book book) {
 		db.addBook(book);	
-		//topic.append("Added book with ISBN - "+book.getISBN());
+		topic.append("Added book with ISBN - "+book.getISBN());
 		return new ResponseEntity<>(
 			      "Successfully added ", 
 			      HttpStatus.OK);
@@ -38,6 +38,7 @@ public class CatalogueService {
 			idNotFndException.setMessage("ISBN " +isbn +" not found");
 			throw idNotFndException;
 		}
+		topic.append("Fetch book with ISBN - "+isbn);
 		return db.getBook(isbn);
 	}
 	
@@ -45,6 +46,7 @@ public class CatalogueService {
 		HttpStatus status=HttpStatus.OK;
 		if (db.getBook(book.getISBN()) !=null ) {
 			addBook(book);
+			topic.append("Update book with ISBN - "+book.getISBN());
 			
 		} else {
 			idNotFndException.setMessage("Matching ISBN not found.No changes will be applied");
@@ -60,8 +62,11 @@ public class CatalogueService {
 		
 		if (db.getBook(isbn) != null ) {
 				db.deleteBook(isbn);
+				topic.append("Deleted book with ISBN - "+isbn);
+
 		} else {
 			idNotFndException.setMessage("Matching ISBN not found.No changes will be applied");
+			topic.append("Book cannot be deleted.Absent ISBN - "+isbn);
 			throw idNotFndException;
 		}
 		return new ResponseEntity<HttpStatus>( status);
