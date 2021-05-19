@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import au.com.commbank.bookcatalogue.dto.Book;
 import au.com.commbank.bookcatalogue.exception.IdNotFoundException;
+import au.com.commbank.bookcatalogue.exception.InvalidISBNValueException;
 import au.com.commbank.bookcatalogue.service.CatalogueService;
 
 @RestController
@@ -25,10 +26,10 @@ public class CatalogueController {
 	 * Adds a book to a datastore. Expects a JSON book object. e.g. of book object below
 	 * {"title":"Books 4","author":["John4","Anna4","Pete4"],"isbn":1234567890123,"publicationDates":"2014-01-01T23:28:56.782Z"}
 	 * @param book
+	 * @throws InvalidISBNValue 
 	 */
 	@RequestMapping(method=RequestMethod.POST, value="/book", consumes = "application/json", produces = "application/json")
-	public ResponseEntity<String> addBook(@RequestBody Book book) {
-		//TODO validate ISBN and Publication date
+	public ResponseEntity<?> addBook(@RequestBody Book book) throws InvalidISBNValueException {
 		return catalogueService.addBook(book);
 	}
 
@@ -38,12 +39,13 @@ public class CatalogueController {
 	 * {"title":"Books 4","author":["John4","Anna4","Pete4"],"isbn":1234567890123,"publicationDates":"2014-01-01T23:28:56.782Z"}
 	 * @param book
 	 * @throws IdNotFoundException
+	 * @throws InvalidISBNValue 
 	 */
 	@RequestMapping(method= RequestMethod.PUT, value="/book", consumes = "application/json", produces = "application/json" )
-	public ResponseEntity<String> updateBook(@RequestBody Book  book) throws IdNotFoundException   {
-		//TODO validate ISBN and Publication date	
+	public ResponseEntity<?> updateBook(@RequestBody Book  book) throws IdNotFoundException, InvalidISBNValueException   {
 		return catalogueService.updateBook(book);		
 	}
+	
 	/**
 	 * Deletes a book from catalogue based on ISBN number passed in the URL
 	 * @param isbn
@@ -53,6 +55,7 @@ public class CatalogueController {
 	public ResponseEntity<HttpStatus> deleteBook(@PathVariable String isbn ) throws IdNotFoundException {
 		return catalogueService.deleteBook(isbn);
 	}
+	
 	/**
 	 * 
 	 * @param isbn
@@ -63,15 +66,4 @@ public class CatalogueController {
 	public Book listBook(@PathVariable String isbn) throws IdNotFoundException {
 		return catalogueService.getBook(isbn) ;
 	}
-
-	/*
-	 * @RequestMapping("/book/{isbn}") ResponseEntity<String> listBook() { return
-	 * new ResponseEntity<>("Hello World!", HttpStatus.OK); }
-	 */
-//	@RequestMapping(method= RequestMethod.POST, value="/booktoqueue", consumes = "application/json", produces = "application/json")
-//	public String sendToQueue() {
-//		return null;
-//		
-//	}
-	
 }

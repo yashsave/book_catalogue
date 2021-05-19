@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class KafkaTopic {
 
 	public void append(String event) {
-		String BootStrapServer = "NS441F2Z2.acustaff.acu.edu.au:9092";
+		String BootStrapServer = "localhost:9092";
 		//create producer properties
 		Properties prop = new Properties();
 		

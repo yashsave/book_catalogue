@@ -3,6 +3,7 @@ package au.com.commbank.bookcatalogue.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -46,7 +47,7 @@ public class Book {
 	 public void setAuthor(List<String> author) {
 		this.author = author;
 	 }	
-	 
+
 	 public void setISBN(String ISBN) {
 	  this.isbn = ISBN;
 	 }

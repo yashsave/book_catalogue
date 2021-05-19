@@ -3,7 +3,7 @@ package au.com.commbank.bookcatalogue.exception;
 import java.util.Date;
 
 import org.springframework.stereotype.Component;
- 
+
 public class ErrorDetails {
 	  private String httpStatusCode;
 	  private String message;

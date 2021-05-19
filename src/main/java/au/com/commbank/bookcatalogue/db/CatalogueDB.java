@@ -16,6 +16,10 @@ public class CatalogueDB {
 		books.put(book.getISBN(), book);
 	}
 	
+	public void updatedBook(Book book ) {
+		books.put(book.getISBN(), book);
+	}
+	
 	public Book getBook (String isbn) {
 	   return books.get(isbn);
 	}
