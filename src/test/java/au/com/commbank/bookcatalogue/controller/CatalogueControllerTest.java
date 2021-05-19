@@ -53,7 +53,7 @@ public class CatalogueControllerTest {
                 .contentType(ContentType.JSON)
                 .body(book)
                 .post(path)
-                .then().statusCode(200);
+                .then().statusCode(201);
 		 
 		 //STEP-3 - Checks Books object is created- isbn exist
 		 test_get1234567890000(isbn);	 
@@ -74,7 +74,7 @@ public class CatalogueControllerTest {
 	}
 	
 	private void deleteisbn(String isbn ) {
-		RestAssured.baseURI = "http://localhost:8081/book/isbn";
+		RestAssured.baseURI = "http://localhost:8081/book";
 		 RestAssured.given()
 		   .auth()
 		   .preemptive()
@@ -111,7 +111,7 @@ public class CatalogueControllerTest {
                 .contentType(ContentType.JSON)
                 .body(book)
                 .post(path)
-                .then().statusCode(200);
+                .then().statusCode(201);
 		
 		/*--- UPDATE THE BOOK ---*/
 		 authors = new ArrayList<String>();
