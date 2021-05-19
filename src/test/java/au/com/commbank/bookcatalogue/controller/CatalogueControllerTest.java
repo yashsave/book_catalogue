@@ -62,7 +62,7 @@ public class CatalogueControllerTest {
 	//Test ISBN value, similarly we can test remaining JSON elements. 
 	//Although not covered in these tests
 	private void test_get1234567890000(String isbn) {
-		RestAssured.baseURI = "http://localhost:8081/book";
+		RestAssured.baseURI = "http://localhost:8081/book/isbn";
 		 RestAssured.given()
 		   .auth()
           .preemptive()
@@ -74,7 +74,7 @@ public class CatalogueControllerTest {
 	}
 	
 	private void deleteisbn(String isbn ) {
-		RestAssured.baseURI = "http://localhost:8081/book";
+		RestAssured.baseURI = "http://localhost:8081/book/isbn";
 		 RestAssured.given()
 		   .auth()
 		   .preemptive()
@@ -140,7 +140,7 @@ public class CatalogueControllerTest {
 		 /*--- CHECH BOOK HAS UPDATED ---*/
 		 
 		 // Specify the base URL to the RESTful web service
-		 RestAssured.baseURI = "http://localhost:8081/book";
+		RestAssured.baseURI = "http://localhost:8081/book/isbn";
 		 
 		 //Test Title
 		 RestAssured.given()

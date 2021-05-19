@@ -23,7 +23,8 @@ public class CatalogueService {
 		BookDeletedWithISBN,
 		AddedBook,
 		SelectedBook,
-		InvalidISBN
+		InvalidISBN,
+		InvalidTitle
 	}
 	
 	@Autowired
@@ -60,6 +61,9 @@ public class CatalogueService {
 			case InvalidISBN:
 				returnMsg="Invalid ISBN -";
 				break;
+			case InvalidTitle:
+				returnMsg="Invalid Title -";
+				break;	
 			default:
 				returnMsg ="";
 				break;
@@ -78,16 +82,29 @@ public class CatalogueService {
 			      HttpStatus.CREATED);
 	}
 	
-	public Book getBook(String isbn) throws IdNotFoundException {
-		if (db.getBook(isbn)== null) {
+	public Book getBookByISBN(String isbn) throws IdNotFoundException {
+		Book book = db.getBook(isbn);
+		if (book== null) {
 			idNotFndException.setMessage(getMsg(MsgStore.InvalidISBN)+isbn );
 			topic.append(getMsg(MsgStore.InvalidISBN)+isbn);
 			throw idNotFndException;
+		} else {
+			topic.append(getMsg(MsgStore.SelectedBook)+isbn);
 		}
-		topic.append(getMsg(MsgStore.SelectedBook)+isbn);
-		return db.getBook(isbn);
+		return book;
 	}
 	
+	public Book getBookByTitle(String title) throws IdNotFoundException {
+		Book book = db.getBookByTitle(title);
+		if (book == null) {
+			idNotFndException.setMessage(getMsg(MsgStore.InvalidTitle)+title );
+			topic.append(getMsg(MsgStore.InvalidTitle)+title);
+			throw idNotFndException;
+		} else {
+			topic.append(getMsg(MsgStore.SelectedBook)+title);
+		}
+		return book;
+	}
 	public ResponseEntity<?> updateBook(Book book) throws IdNotFoundException, InvalidISBNValueException {
 		HttpStatus status=HttpStatus.OK;
 		if (db.getBook(book.getISBN()) !=null ) {

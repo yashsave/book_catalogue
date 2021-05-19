@@ -62,8 +62,19 @@ public class CatalogueController {
 	 * @returns a book based on the ISBN  passed in URL
 	 * @throws IdNotFoundException
 	 */
-	@RequestMapping(method= RequestMethod.GET, value="/book/{isbn}", produces = "application/json"  )
-	public Book listBook(@PathVariable String isbn) throws IdNotFoundException {
-		return catalogueService.getBook(isbn) ;
+	@RequestMapping(method= RequestMethod.GET, value="/book/isbn/{isbn}", produces = "application/json"  )
+	public Book listBookByISBN(@PathVariable String isbn) throws IdNotFoundException {
+		return catalogueService.getBookByISBN(isbn) ;
+	}
+	
+	/**
+	 * 
+	 * @param title
+	 * @return  a book based on the Title  passed in URL
+	 * @throws IdNotFoundException
+	 */
+	@RequestMapping(method= RequestMethod.GET, value="/book/title/{title}", produces = "application/json"  )
+	public Book listBookByTitle(@PathVariable String title) throws IdNotFoundException {
+		return catalogueService.getBookByTitle(title) ;
 	}
 }

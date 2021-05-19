@@ -24,6 +24,17 @@ public class CatalogueDB {
 	   return books.get(isbn);
 	}
 	
+	public Book getBookByTitle (String title) {
+		Book book = null;
+			for (Map.Entry<String, Book> entry : books.entrySet()) {
+				if (entry.getValue().getTitle().equals(title)) {
+					book = entry.getValue();
+					break;
+				}
+			}
+		   return book;
+		}
+	
 	public void deleteBook(String isbn) {
 		books.remove(isbn);
 	}
